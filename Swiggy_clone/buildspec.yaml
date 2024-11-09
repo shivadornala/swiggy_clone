@@ -32,31 +32,31 @@ phases:
       - export SONAR_SCANNER_OPTS="-server"
 
   build:
-  commands:
-    - echo "Starting build phase..."
-    - echo "Logging into Docker registry..."
-    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
-    - echo "Docker login Sucessed..."
-    - echo "Running tests..."
-    - echo "Building Docker image..."
-    - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/swiggy:latest" .
-    - echo "Pushing Docker image..."
-    - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/swiggy:latest"
+    commands:
+      - echo "Starting build phase..."
+      - echo "Logging into Docker registry..."
+      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
+      - echo "Docker login Success..."
+      - echo "Running tests..."
+      - echo "Building Docker image..."
+      - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/swiggy:latest" .
+      - echo "Pushing Docker image..."
+      - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/swiggy:latest"
 
-
-post_build:
-  commands:
-    - |
-      aws ses send-email \
-        --from "chetany31@gmail.com" \
-        --to "chetan948y@gmail.com" \
-        --subject "CodeBuild Status: $CODEBUILD_BUILD_ID" \
-        --text "Build status: $CODEBUILD_BUILD_STATUS" \
-        --region "ap-south-1"
+  post_build:
+    commands:
+      - |
+        aws ses send-email \
+          --from "chetany31@gmail.com" \
+          --to "chetan948y@gmail.com" \
+          --subject "CodeBuild Status: $CODEBUILD_BUILD_ID" \
+          --text "Build status: $CODEBUILD_BUILD_STATUS" \
+          --region "ap-south-1"
 
 artifacts:
   files:
     - '**/*'
+
 
 # version: 0.2
 
