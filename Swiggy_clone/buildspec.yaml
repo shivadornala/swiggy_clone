@@ -39,9 +39,9 @@ phases:
       - echo "Docker login Success..."
       - echo "Running tests..."
       - echo "Building Docker image..."
-      - docker build -t "$/cicd/docker-registry/url/$/cicd/docker-credentials/username/swiggy:latest" .
+      - docker build -t "$DOCKER_REGISTRY_URL/$/cicd/docker-credentials/username/swiggy:latest" .
       - echo "Pushing Docker image..."
-      - docker push "$/cicd/docker-registry/url/$/cicd/docker-credentials/username/swiggy:latest"
+      - docker push "$DOCKER_REGISTRY_URL/url/$DOCKER_REGISTRY_URL/swiggy:latest"
 
   post_build:
     commands:
