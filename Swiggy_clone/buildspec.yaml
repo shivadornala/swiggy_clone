@@ -118,7 +118,6 @@ phases:
 
     - echo "Sending final build status via AWS SES..."
     - aws ses send-email --from "madithati123@gmail.com" --destination "ToAddresses=madithatisreedhar123@gmail.com" --message "Subject={Data=CodeBuild Status:$CODEBUILD_BUILD_ID, Charset=utf-8}, Body={Text={Data=Build status: $CODEBUILD_BUILD_STATUS, Charset=utf-8}}" --region "ap-south-1"
-
   # post_build:
   #   commands:
   #     - echo "Performing Trivy image scan after building the image..."
