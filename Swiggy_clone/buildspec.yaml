@@ -100,24 +100,27 @@ phases:
       - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/swiggy:latest"
 
     post_build:
-  commands:
-    - echo "Performing Trivy image scan after building the image..."
-    - trivy image "$DOCKER_REGISTRY_USERNAME/swiggy:latest" >> trivyimage.txt
+      commands:
+       - echo "Running tests..."
+       - echo "Building Docker image..."
+       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
+       - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/swiggy:latest" .
+       - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/swiggy:latest"
+  post_build:
+    commands:
+      - echo "Performing Trivy image scan after building the image..."
+      - aws ses send-email --from "madithati123@gmail.com" --to "madithatisreedhar123@gmail.com" --subject "CodeBuild Status:$CODEBUILD_BUILD_ID" --text "Build status: $CODEBUILD_BUILD_STATUS" --region "ap-south-1" 
 
-    - echo "Sending initial build status via AWS SES..."
-    - aws ses send-email --from "madithati123@gmail.com" --destination "ToAddresses=madithatisreedhar123@gmail.com" --message "Subject={Data=CodeBuild Status:$CODEBUILD_BUILD_ID, Charset=utf-8}, Body={Text={Data=Build status: $CODEBUILD_BUILD_STATUS, Charset=utf-8}}" --region "ap-south-1"
+      - trivy image  "$DOCKER_REGISTRY_USERNAME/swiggy:latest" >> trivyimage.txt
+      - echo "Running OWASP Dependency-Check scan..."
+      - cd dependency-check/bin
+      - ./dependency-check.sh --scan . --format ALL
+      - echo "Build completed successfully!"
+      - echo "Running SonarQube analysis result"
+      - sonar-scanner -Dsonar.projectKey=swiggy -Dsonar.sources=. -Dsonar.host.url=http://65.1.1.149:9000/
+      - aws ses send-email --from "madithati123@gmail.com" --to "madithatisreedhar123@gmail.com" --subject "CodeBuild Status:$CODEBUILD_BUILD_ID" --text "Build status: $CODEBUILD_BUILD_STATUS" --region "ap-south-1" 
+         Update with your preferred AWS region
 
-    - echo "Running OWASP Dependency-Check scan..."
-    - cd dependency-check/bin
-    - ./dependency-check.sh --scan . --format ALL
-    - cd ../..  # Navigate back to the project root if needed
-
-    - echo "Build completed successfully!"
-    - echo "Running SonarQube analysis result..."
-    - sonar-scanner -Dsonar.projectKey=swiggy -Dsonar.sources=. -Dsonar.host.url=http://65.1.1.149:9000/
-
-    - echo "Sending final build status via AWS SES..."
-    - aws ses send-email --from "madithati123@gmail.com" --destination "ToAddresses=madithatisreedhar123@gmail.com" --message "Subject={Data=CodeBuild Status:$CODEBUILD_BUILD_ID, Charset=utf-8}, Body={Text={Data=Build status: $CODEBUILD_BUILD_STATUS, Charset=utf-8}}" --region "ap-south-1"
   # post_build:
   #   commands:
   #     - echo "Performing Trivy image scan after building the image..."
