@@ -35,13 +35,13 @@ phases:
     commands:
       - echo "Starting build phase..."
       - echo "Logging into Docker registry..."
-      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
+      - echo "$/cicd/docker-credentials/password" | docker login -u "$/cicd/docker-credentials/username" --password-stdin "$/cicd/docker-registry/url"
       - echo "Docker login Success..."
       - echo "Running tests..."
       - echo "Building Docker image..."
-      - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/swiggy:latest" .
+      - docker build -t "$/cicd/docker-registry/url/$/cicd/docker-credentials/username/swiggy:latest" .
       - echo "Pushing Docker image..."
-      - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/swiggy:latest"
+      - docker push "$/cicd/docker-registry/url/$/cicd/docker-credentials/username/swiggy:latest"
 
   post_build:
     commands:
