@@ -118,6 +118,7 @@ phases:
       - echo "Running OWASP Dependency-Check scan..."
       # - cd swiggy
       - aws s3 cp s3://swiggybuck/swiggy/dependency-check/bin/dependency-check.sh ./dependency-check/bin/dependency-check.sh
+      - chmod +x ./dependency-check/bin/dependency-check.sh
       - cd dependency-check/bin
       - ./dependency-check.sh --scan . --format ALL
       - echo "Build completed successfully!"
