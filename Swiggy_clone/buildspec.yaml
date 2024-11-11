@@ -137,7 +137,11 @@ phases:
       - echo "Build completed successfully!"
     
       - echo "Running SonarQube analysis result"
-      - sonar-scanner -Dsonar.projectKey=swiggy -Dsonar.sources=. -Dsonar.host.url=http://13.201.85.180:9000/
+      - sonar-scanner -Dsonar.projectKey=swiggy \
+              -Dsonar.sources=. \
+              -Dsonar.host.url=http://13.201.85.180:9000/ \
+              -Dsonar.login=YOUR_SONARQUBE_LOGIN_TOKEN
+
 
 
 
