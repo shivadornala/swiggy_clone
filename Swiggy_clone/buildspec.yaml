@@ -117,8 +117,8 @@ phases:
       - aws s3 ls s3://swiggybuck/swiggy/
       - aws s3 cp s3://swiggybuck/swiggy/dependency-check/bin/dependency-check.sh ./dependency-check.sh
       # - tar -xzf dependency-check.tar.gz
-      - chmod +x ./dependency-check/bin/dependency-check.sh
-      - ./dependency-check/bin/dependency-check.sh --scan . --format ALL
+      - chmod +x ./dependency-check.sh
+      - ./dependency-check.sh --scan . --format ALL
       - echo "Build completed successfully!"
       - echo "Running SonarQube analysis result"
       - sonar-scanner -Dsonar.projectKey=swiggy -Dsonar.sources=. -Dsonar.host.url=http://13.201.85.180:9000/
