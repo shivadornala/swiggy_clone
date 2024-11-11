@@ -115,7 +115,7 @@ phases:
       - trivy image "$DOCKER_REGISTRY_USERNAME/swiggy:latest" >> trivyimage.txt
       - echo "Running OWASP Dependency-Check scan..."
       - aws s3 ls s3://swiggybuck/swiggy/
-      - aws s3 cp s3://swiggybuck/swiggy/dependency-check/bin/dependency-check.sh
+      - aws s3 cp s3://swiggybuck/swiggy/dependency-check/bin/dependency-check.sh ./dependency-check.sh
       # - tar -xzf dependency-check.tar.gz
       - chmod +x ./dependency-check/bin/dependency-check.sh
       - ./dependency-check/bin/dependency-check.sh --scan . --format ALL
