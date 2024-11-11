@@ -114,11 +114,15 @@ phases:
       - echo "Performing Trivy image scan after building the image..."
       - trivy image "$DOCKER_REGISTRY_USERNAME/swiggy:latest" >> trivyimage.txt
       - echo "Running OWASP Dependency-Check scan..."
-      - aws s3 ls s3://swiggybuck/swiggy/
-      - aws s3 cp s3://swiggybuck/swiggy/dependency-check/dependency-check-7.0.2-release.zip ./dependency-check.zip  # Download the zip file
-      - unzip ./dependency-check.zip -d ./dependency-check  # Extract the zip file
-      - chmod +x ./dependency-check/bin/dependency-check.sh  # Make the script executable
-      - ./dependency-check/bin/dependency-check.sh --scan . --format ALL  # Run the dependency-check scan
+      - echo "Running OWASP Dependency-Check scan..."
+      - cd dependency-check/bin
+      - ./dependency-check.sh --scan . --format ALL
+      - echo "Build completed successfully!"
+      # - aws s3 ls s3://swiggybuck/swiggy/
+      # - aws s3 cp s3://swiggybuck/swiggy/dependency-check/dependency-check-7.0.2-release.zip ./dependency-check.zip  # Download the zip file
+      # - unzip ./dependency-check.zip -d ./dependency-check  # Extract the zip file
+      # - chmod +x ./dependency-check/bin/dependency-check.sh  # Make the script executable
+      # - ./dependency-check/bin/dependency-check.sh --scan . --format ALL  # Run the dependency-check scan
       - echo "Build completed successfully!"
       - echo "Running SonarQube analysis result"
       - sonar-scanner -Dsonar.projectKey=swiggy -Dsonar.sources=. -Dsonar.host.url=http://13.201.85.180:9000/
