@@ -120,6 +120,8 @@ phases:
     
       # Unzip the downloaded file
       - unzip ./dependency-check.zip -d ./dependency-check
+      - echo "Listing files in dependency-check folder:"
+      - ls ./dependency-check
     
       # Navigate to the extracted directory
       - cd ./dependency-check/bin
