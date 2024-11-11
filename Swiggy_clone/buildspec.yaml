@@ -126,7 +126,8 @@ phases:
 
     
       # Navigate to the extracted directory
-      - cd ./dependency-check/bin
+      - cd ./dependency-check/dependency-check/bin
+
     
       # Make the script executable
       - chmod +x ./dependency-check.sh
