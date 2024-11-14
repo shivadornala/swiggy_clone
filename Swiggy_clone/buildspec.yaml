@@ -161,5 +161,4 @@ artifacts:
     # - '**/*'  # Yeh sab files ko upload karega
     # - swiggy-clone-app\appspec.yamlSwiggy_clone\appspec.yaml
     # -  swiggy-clone-app\Swiggy_clone\appspec.yaml
-    - \appspec.yaml
-
+    - swiggy-clone-app\Swiggy_clone\appspec.yaml
