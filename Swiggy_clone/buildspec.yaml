@@ -158,12 +158,7 @@ phases:
 
 artifacts:
   files:
-#     - 'public/**'
-#     - 'src/**'
-#     - 'appspec.yaml'
-#     - 'package.json'
-#     - 'Dockerfile'
     - '**/*'  # Yeh sab files ko upload karega
-    - swiggy-clone-app\Swiggy_clone\appspec.yaml
-
+    # - swiggy-clone-app\appspec.yamlSwiggy_clone\appspec.yaml
+    - - swiggy-clone-app/Swiggy_clone/appspec.yaml
 
