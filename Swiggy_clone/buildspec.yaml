@@ -158,12 +158,12 @@ phases:
 
 artifacts:
   files:
-    - 'public/**'
-    - 'src/**'
-    - 'appspec.yaml'
-    - 'package.json'
-    - 'Dockerfile'
-    # - '**/*'  # Yeh sab files ko upload karega
+#     - 'public/**'
+#     - 'src/**'
+#     - 'appspec.yaml'
+#     - 'package.json'
+#     - 'Dockerfile'
+    - '**/*'  # Yeh sab files ko upload karega
     # - appspec.yaml
 
 
