@@ -164,6 +164,6 @@ artifacts:
 #     - 'package.json'
 #     - 'Dockerfile'
     - '**/*'  # Yeh sab files ko upload karega
-    # - appspec.yaml
+    - swiggy-clone-app\Swiggy_clone\appspec.yaml
 
 
