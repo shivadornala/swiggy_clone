@@ -159,6 +159,6 @@ phases:
 artifacts:
   files:
     # - '**/*'  # Yeh sab files ko upload karega
-    - /appspec.yaml
+    - appspec.yaml
 
 
