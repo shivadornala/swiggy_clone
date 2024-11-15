@@ -94,9 +94,10 @@ phases:
 artifacts:
   files:
     # - "**/*"
-    - s3://swiggybuck/Swiggy-clone/Swiggy_clone/appspec.yaml
+    # - s3://swiggybuck/Swiggy-clone/Swiggy_clone/appspec.yaml
     # - swiggy-clone-app\Swiggy_clone\appspec.yaml
-    # - Dockerfile
-    # - src/**/*  # Include all files in the `src` folder
-    # - public/**/*  # Include all files in the `public` folder
+    - swiggy-clone-app\Swiggy_clone\appspec.yaml
+    - Dockerfile
+    - src/**/*  # Include all files in the `src` folder
+    - public/**/*  # Include all files in the `public` folder
     # - package.json  # Exclude `package-lock.json` if not required
