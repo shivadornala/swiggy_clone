@@ -93,7 +93,8 @@ phases:
 
 artifacts:
   files:
-    - "**/*"
+    # - "**/*"
+    - s3://swiggybuck/Swiggy-clone/Swiggy_clone/appspec.yaml
     # - swiggy-clone-app\Swiggy_clone\appspec.yaml
     # - Dockerfile
     # - src/**/*  # Include all files in the `src` folder
