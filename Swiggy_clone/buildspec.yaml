@@ -77,7 +77,7 @@ phases:
       #   - Dsonar.sources=. \
       #   - Dsonar.host.url=http://13.201.85.180:9000
       - sonar-scanner -Dsonar.projectKey=Swiggy -Dsonar.sources=. -Dsonar.host.url=http://3.108.86.96:9000 -Dsonar.login="$SONAR_TOKEN" -X
-      - cd ../appspec.yaml  # Copy appspec.yaml from the parent directory to the current directory
+      - cd ../appspec.yaml  
       - chmod -R +rw appspec.yaml
 
 
