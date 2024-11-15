@@ -77,8 +77,6 @@ phases:
       #   - Dsonar.sources=. \
       #   - Dsonar.host.url=http://13.201.85.180:9000
       - sonar-scanner -Dsonar.projectKey=Swiggy -Dsonar.sources=. -Dsonar.host.url=http://3.108.86.96:9000 -Dsonar.login="$SONAR_TOKEN" -X
-      - cd ../appspec.yaml  
-      - chmod -R +rw appspec.yaml
 
 
 
@@ -95,7 +93,7 @@ phases:
 
 artifacts:
   files:
-    - ./appspec.yaml
+    - swiggy-clone-app/Swiggy_clone/appspec.yaml
     - Dockerfile
     - src/**/*  # Include all files in the `src` folder
     - public/**/*  # Include all files in the `public` folder
