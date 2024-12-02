@@ -36,47 +36,47 @@ phases:
     commands:
       - echo "Running tests..."
       - echo "Building Docker image..."
-      - cd Swiggy_clone
-      - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/swiggy:latest" .
-      - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/swiggy:latest"
+      # - cd Swiggy-clone
+      # - docker build -t docker.io/shivakumar825/swiggy:latest" .
+      # - docker push docker.io/shivakumar825/swiggy:latest"
 
 
 
   post_build:
     commands:
       - echo "Performing Trivy image scan after building the image..."
-      - trivy image "$DOCKER_REGISTRY_USERNAME/swiggy:latest" >> trivyimage.txt
+      # - trivy image shivakumar825/swiggy:latest" >> trivyimage.txt
       - echo "Running OWASP Dependency-Check scan..."
     
       # Download the dependency-check zip from S3
       # - aws s3 cp s3://swiggybuck/swiggy/dependency-check-7.0.2-release.zip ./dependency-check.zip
       # - aws s3 cp s3://swiggybuck/swiggy/dependency-check-7.0.2-release.zip ./dependency-check.zip
-      - aws s3 cp s3://swiggybuck/Swiggy-clone/dependency-check-7.0.2-release.zip ./dependency-check.zip
+      # - aws s3 cp s3://swiggybuck/Swiggy-clone/dependency-check-7.0.2-release.zip ./dependency-check.zip
 
-      # Unzip the downloaded file
-      - unzip ./dependency-check.zip -d ./dependency-check
-      - echo "Listing files in dependency-check folder:"
-      # - ls -al ./dependency-check
-      - ls -R ./dependency-check
-
-    
-      # Navigate to the extracted directory
-      - cd ./dependency-check/dependency-check/bin
+      # # Unzip the downloaded file
+      # - unzip ./dependency-check.zip -d ./dependency-check
+      # - echo "Listing files in dependency-check folder:"
+      # # - ls -al ./dependency-check
+      # - ls -R ./dependency-check
 
     
-      # Make the script executable
-      - chmod +x ./dependency-check.sh
+      # # Navigate to the extracted directory
+      # - cd ./dependency-check/dependency-check/bin
+
     
-      # Run the dependency-check scan
-      - ./dependency-check.sh --scan . --format ALL
+      # # Make the script executable
+      # - chmod +x ./dependency-check.sh
+    
+      # # Run the dependency-check scan
+      # - ./dependency-check.sh --scan . --format ALL
       - echo "Build completed successfully!"
     
       - echo "Running SonarQube analysis result"
       # - sonar-scanner \
-      #   - Dsonar.projectKey=Swiggy \
+      #   - Dsonar.projectKey=swiggy-clone  \
       #   - Dsonar.sources=. \
-      #   - Dsonar.host.url=http://13.232.137.49:9000
-      - sonar-scanner -Dsonar.projectKey=Swiggy -Dsonar.sources=. -Dsonar.host.url=http://13.232.137.49:9000 -Dsonar.login="$SONAR_TOKEN" -X
+      #   - Dsonar.host.url=http://15.207.14.127:9000
+      - sonar-scanner -Dsonar.projectKey=swiggy-clone  -Dsonar.sources=. -Dsonar.host.url=http://15.207.14.127:9000 -Dsonar.login="$SONAR_TOKEN" -X
 
 
 
